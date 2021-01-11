@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fetch Demo</title>
+    </head>
+    <body>
+        <h1>Fetch Demo</h1>
+        <input type="text" name="address" id="addressInput" />
+        <button onclick="getWeather()">Get Weather</button>
+        <br /><br />
+        <div id='forecast'></div>
+        <hr/>
+        <div id='location'></div>
+        <hr/>
+        <div id='address'></div>
+       
+        <script>
+           
+            const forecastDiv = document.getElementById('forecast');
+            const locationDiv = document.getElementById('location');
+            const addressDiv = document.getElementById('address');
+            const addressInput = document.getElementById('addressInput');
+
+            function getWeather() {
+                const address = addressInput.value;
+                console.log('address', address);
+                const url = `http://localhost:3000/weather?address=${address}`;
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        
+                        forecastDiv.innerHTML = `Forecast: ${data.forecast}`;
+                        locationDiv.innerHTML = `Location: ${data.location}`;
+                        addressDiv.innerHTML = `Address: ${data.address}`;
+                        
+                    });
+                }
+        </script>
+    </body>
+</html>
